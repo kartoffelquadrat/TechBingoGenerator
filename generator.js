@@ -2,7 +2,11 @@ let enhancers
 let technologies
 let titles
 
-async function generate() {
+function registerLoadHander() {
+    document.body.addEventListener('click', generate);
+}
+
+async function load() {
 
     // load buzzwords
     await loadArrays();
@@ -10,11 +14,18 @@ async function generate() {
     console.log(technologies)
     console.log(titles)
 
+    // fill page
+    generate()
+}
+
+function generate() {
+
     // pick random of each
     let random_enhancer = getRandomElement(enhancers)
     let random_technology = getRandomElement(technologies)
     let random_title = getRandomElement(titles)
     let fusion = random_enhancer + " " + random_technology + " " + random_title
+    console.log("new title: "+fusion)
 
     // store in page
     document.getElementById("bingo").innerText = fusion
